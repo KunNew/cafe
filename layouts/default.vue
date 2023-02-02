@@ -9,7 +9,7 @@
       dark
     >
       <v-list shaped>
-        <v-list-item to="/">
+        <v-list-item :to="localePath('/')" exact>
           <v-list-item-icon>
             <v-icon color="info">mdi-view-dashboard</v-icon>
           </v-list-item-icon>
@@ -18,7 +18,7 @@
           </v-list-item-content>
         </v-list-item>
         <v-subheader>User Management</v-subheader>
-        <v-list-item to="/user">
+        <v-list-item :to="localePath('user')">
           <v-list-item-icon>
             <v-icon color="info">mdi-account-outline</v-icon>
           </v-list-item-icon>
@@ -36,7 +36,11 @@
       <v-menu open-on-hover offset-y offset-overflow>
         <template v-slot:activator="{ on, attrs }">
           <v-avatar tile v-on="on" v-bind="attrs" class="mr-5">
-            <v-img contain :src="require(`~/assets/${$i18n.locale}.png`)" alt="" />
+            <v-img
+              contain
+              :src="require(`~/assets/${$i18n.locale}.png`)"
+              alt=""
+            />
             <!-- <v-img contain :src="storagePath + 'lang/' + $i18n.locale + '.png'"></v-img> -->
           </v-avatar>
         </template>
@@ -176,8 +180,7 @@ export default {
   },
   methods: {
     changeLanguage(locale) {
-      this.$store.dispatch('changeLanguage', locale)
-      this.$i18n.locale = locale
+      this.$router.replace(this.switchLocalePath(locale))
     },
     logout() {
       this.$store.dispatch('auth/logout')
@@ -185,7 +188,6 @@ export default {
   },
   beforeCreate() {
     this.$store.commit('auth/SET_REFRESHING', false)
-    this.$i18n.locale = this.$store.state.locale
     this.$store.dispatch('auth/getUser').catch((err) => {})
   },
 }

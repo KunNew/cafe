@@ -1,85 +1,76 @@
 <template>
   <v-container class="fill-height fill_image" fluid>
-        <v-row align="center" justify="center" dense>
-          <v-col cols="12" sm="8" md="4" lg="4" style="padding: 10px">
-            <v-card elevation="0" color="#FFFFFFDD">
-              <v-card-subtitle class="text-center text-h5"
-                >Login</v-card-subtitle
+    <v-row align="center" justify="center" dense>
+      <v-col cols="12" sm="8" md="4" lg="4" style="padding: 10px">
+        <v-card elevation="0" color="#FFFFFFDD">
+          <v-card-subtitle class="text-center text-h5">Login</v-card-subtitle>
+          <v-divider></v-divider>
+          <v-card-text>
+            <v-img v-if="logo" :src="logo" height="150" contain></v-img><br />
+            <v-alert v-if="error" tile color="error" dark>
+              {{ error }}
+            </v-alert>
+            <v-form @submit.prevent="login" lazy-validation ref="form">
+              <v-text-field
+                v-model="form.username"
+                autocomplete="off"
+                label="Enter your email"
+                name="email"
+                required
+                :rules="[(v) => !!v || 'Please enter username or email']"
+                prepend-inner-icon="mdi-email"
+                type="email"
+                class="rounded-0"
+                outlined
               >
-              <v-divider></v-divider>
-              <v-card-text>
-                <v-img v-if="logo" :src="logo" height="150" contain></v-img
-                ><br />
-                <v-alert v-if="error" tile color="error" dark>
-                  {{ error }}
-                </v-alert>
-                <v-form @submit.prevent="login" lazy-validation ref="form">
-                  <v-text-field
-                    v-model="form.username"
-                    autocomplete="off"
-                    label="Enter your email"
-                    name="email"
-                    required
-                    :rules="[(v) => !!v || 'Please enter username or email']"
-                    prepend-inner-icon="mdi-email"
-                    type="email"
-                    class="rounded-0"
-                    outlined
-                  >
-                  </v-text-field>
-                  <v-text-field
-                    v-model="form.password"
-                    autocomplete="off"
-                    label="Enter your password"
-                    name="password"
-                    required
-                    :rules="[(v) => !!v || 'Please enter your password']"
-                    prepend-inner-icon="mdi-lock"
-                    :type="show_password ? 'text' : 'password'"
-                    class="rounded-0"
-                    outlined
-                  >
-                  </v-text-field>
-                  <v-card-actions
-                    class="text--secondary"
-                    style="margin-top: -30px"
-                  >
-                    <v-checkbox
-                      v-model="show_password"
-                      color="#000000"
-                      label="Show password"
-                    ></v-checkbox>
-                    <v-spacer></v-spacer>
-                    <router-link
-                      class="pl-2"
-                      :to="{ name: 'forget' }"
-                      style="color: #000000"
-                      >Forgot password?</router-link
-                    >
-                  </v-card-actions>
-                  <v-btn
-                    type="submit"
-                    class="rounded-0"
-                    color="success"
-                    x-large
-                    block
-                    dark
-                    >Login</v-btn
-                  >
-                  <v-card-actions class="text--secondary">
-                    <v-checkbox
-                      color="#000000"
-                      label="Remember me"
-                    ></v-checkbox>
-                    <v-spacer></v-spacer>
-                    <!-- <router-link class="pl-2" :to="{ name: 'register' }" style="color: #000000;">Sign Up</router-link> -->
-                  </v-card-actions>
-                </v-form>
-              </v-card-text>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-container>
+              </v-text-field>
+              <v-text-field
+                v-model="form.password"
+                autocomplete="off"
+                label="Enter your password"
+                name="password"
+                required
+                :rules="[(v) => !!v || 'Please enter your password']"
+                prepend-inner-icon="mdi-lock"
+                :type="show_password ? 'text' : 'password'"
+                class="rounded-0"
+                outlined
+              >
+              </v-text-field>
+              <v-card-actions class="text--secondary" style="margin-top: -30px">
+                <v-checkbox
+                  v-model="show_password"
+                  color="#000000"
+                  label="Show password"
+                ></v-checkbox>
+                <v-spacer></v-spacer>
+                <router-link
+                  class="pl-2"
+                  :to="{ name: 'forget' }"
+                  style="color: #000000"
+                  >Forgot password?</router-link
+                >
+              </v-card-actions>
+              <v-btn
+                type="submit"
+                class="rounded-0"
+                color="success"
+                x-large
+                block
+                dark
+                >Login</v-btn
+              >
+              <v-card-actions class="text--secondary">
+                <v-checkbox color="#000000" label="Remember me"></v-checkbox>
+                <v-spacer></v-spacer>
+                <!-- <router-link class="pl-2" :to="{ name: 'register' }" style="color: #000000;">Sign Up</router-link> -->
+              </v-card-actions>
+            </v-form>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <style scoped>
@@ -111,8 +102,9 @@ export default {
           .dispatch('auth/login', this.form)
           .then((response) => {
             let redirect_location = window.localStorage.getItem('redirect')
+            console.log(redirect_location);
             if (redirect_location) {
-              this.$router.push(redirect_location)
+              this.$router.push('/' + redirect_location.split("/")[3])
               window.localStorage.removeItem('redirect')
             } else {
               this.$router.push('/')

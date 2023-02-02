@@ -109,6 +109,7 @@ const actions = {
           window.localStorage.setItem(
             'redirect',
             window.location.toString().replace(constants.baseUrl, '')
+
           )
           this.$router.push('/auth/login')
           reject(response)

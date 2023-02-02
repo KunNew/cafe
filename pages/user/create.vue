@@ -106,7 +106,7 @@
               </v-card-text>
               <v-card-actions class="px-4 pb-4">
                   <v-btn type="submit" color="success" :loading="form.submitting"><v-icon left>mdi-checkbox-marked-circle-outline</v-icon>Save</v-btn>
-                  <v-btn color="secondary"><v-icon left>mdi-cancel</v-icon>Cancel</v-btn>
+                  <v-btn color="secondary" @click="$router.go(-1)"><v-icon left>mdi-cancel</v-icon>Cancel</v-btn>
               </v-card-actions>
           </v-card>
       </v-form>

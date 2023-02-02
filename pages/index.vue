@@ -9,10 +9,16 @@
 </template>
 
 <script>
+import constants from '~/helper/constants'
+
 export default {
   name: 'IndexPage',
   data() {
     return {}
+  },
+  mounted() {
+    console.log(this.$route.fullPath);
+    console.log(window.location.toString().replace(this.$route.fullPath))
   },
 }
 </script>

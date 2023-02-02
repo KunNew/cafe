@@ -42,20 +42,18 @@ export default {
   ],
 // i18n
   i18n: {
-    locales: [
-      {
-        code: 'en',
-        file: 'en.js'
-      },
-      {
-        code: 'km',
-        file: 'km.js'
-      }
-    ],
-    langDir: 'lang/',
+    locales: ['en', 'km'],
     defaultLocale: 'en',
     vueI18n: {
       fallbackLocale: 'en',
+      messages: {
+        en: {
+          dashboard: 'Dashboard'
+        },
+        km: {
+          dashboard: 'ផ្ទាំងរូបភាព'
+        },
+      }
     }
   },
 
