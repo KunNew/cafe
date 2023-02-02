@@ -32,6 +32,36 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title>{{ title }}</v-toolbar-title>
       <v-spacer />
+
+      <v-menu open-on-hover offset-y offset-overflow>
+        <template v-slot:activator="{ on, attrs }">
+          <v-avatar tile v-on="on" v-bind="attrs" class="mr-5">
+            <v-img contain :src="require(`~/assets/${$i18n.locale}.png`)" alt="" />
+            <!-- <v-img contain :src="storagePath + 'lang/' + $i18n.locale + '.png'"></v-img> -->
+          </v-avatar>
+        </template>
+        <v-list dense>
+          <v-list-item @click="changeLanguage('km')">
+            <v-list-item-avatar tile>
+              <v-img contain :src="require('~/assets/km.png')"></v-img>
+            </v-list-item-avatar>
+            <v-list-item-content>
+              <v-list-item-title>Km</v-list-item-title>
+              <v-list-item-subtitle>ភាសាខ្មែរ</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item @click="changeLanguage('en')">
+            <v-list-item-avatar tile>
+              <v-img contain :src="require('~/assets/en.png')"></v-img>
+            </v-list-item-avatar>
+            <v-list-item-content>
+              <v-list-item-title>En</v-list-item-title>
+              <v-list-item-subtitle>English</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+
       <v-menu offset-y transition="slide-y-transition" v-if="user">
         <template v-slot:activator="{ on, attrs }">
           <v-btn class="mr-2" icon v-bind="attrs" v-on="on">
@@ -145,14 +175,18 @@ export default {
     }),
   },
   methods: {
+    changeLanguage(locale) {
+      this.$store.dispatch('changeLanguage', locale)
+      this.$i18n.locale = locale
+    },
     logout() {
       this.$store.dispatch('auth/logout')
     },
   },
   beforeCreate() {
-    this.$store.dispatch('auth/getUser').catch((err) => {
-      console.log(err)
-    })
+    this.$store.commit('auth/SET_REFRESHING', false)
+    this.$i18n.locale = this.$store.state.locale
+    this.$store.dispatch('auth/getUser').catch((err) => {})
   },
 }
 </script>

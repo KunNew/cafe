@@ -228,7 +228,7 @@ export default {
   methods: {
     fetchProfile() {
       axiosApiInstance.get('auth/user').then((response) => {
-        console.log(response.data)
+        // console.log(response.data)
         this.initFormProfile(response)
       })
     },

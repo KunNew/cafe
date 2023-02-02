@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-card class="mb-3">
       <v-card-title>
-       Dashboard
+        {{ $t('dashboard') }}
       </v-card-title>
     </v-card>
   </v-container>
@@ -11,12 +11,8 @@
 <script>
 export default {
   name: 'IndexPage',
-  data () {
-    return {
-
-    }
+  data() {
+    return {}
   },
-
-
 }
 </script>
