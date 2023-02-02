@@ -20,7 +20,7 @@
         <v-btn
           class="ma-1"
           color="warning"
-          :to="{ name: 'user-id', params: { id: model.id } }"
+          :to="localePath({ name: 'user-id', params: { id: model.id } })"
           ><v-icon left>mdi-pencil-box-outline</v-icon>Edit user</v-btn
         >
       </v-card-subtitle>
@@ -108,7 +108,6 @@
 import constants from '~/helper/constants'
 import axiosApiInstance from '~/utils/utilites'
 export default {
-
   data: () => ({
     loading: true,
     constants: constants,

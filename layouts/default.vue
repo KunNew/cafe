@@ -26,6 +26,14 @@
             <v-list-item-title>User</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <v-list-item :to="localePath('category')">
+          <v-list-item-icon>
+            <v-icon color="info">mdi-shape-outline</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Category</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" fixed app dark>

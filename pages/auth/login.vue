@@ -104,7 +104,7 @@ export default {
             let redirect_location = window.localStorage.getItem('redirect')
             console.log(redirect_location);
             if (redirect_location) {
-              this.$router.push('/' + redirect_location.split("/")[3])
+              this.$router.push('/' + redirect_location.split("3000/")[1])
               window.localStorage.removeItem('redirect')
             } else {
               this.$router.push('/')
