@@ -34,6 +34,14 @@
             <v-list-item-title>Category</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <v-list-item :to="localePath('product')">
+          <v-list-item-icon>
+            <v-icon color="info">mdi-ferry</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Product</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" fixed app dark>

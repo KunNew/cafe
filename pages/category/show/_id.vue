@@ -21,7 +21,7 @@
           class="ma-1"
           color="warning"
           :to="localePath({ name: 'category-id', params: { id: model.id } })"
-          ><v-icon left>mdi-pencil-box-outline</v-icon>Edit user</v-btn
+          ><v-icon left>mdi-pencil-box-outline</v-icon>Edit category</v-btn
         >
       </v-card-subtitle>
       <v-card-text v-if="!loading">

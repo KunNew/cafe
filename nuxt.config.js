@@ -48,10 +48,12 @@ export default {
       fallbackLocale: 'en',
       messages: {
         en: {
-          dashboard: 'Dashboard'
+          dashboard: 'Dashboard',
+          product: 'Product'
         },
         km: {
-          dashboard: 'ផ្ទាំងរូបភាព'
+          dashboard: 'ផ្ទាំងរូបភាព',
+          product: 'ផលិតផល'
         },
       }
     }
